@@ -61,7 +61,8 @@ export class LoginPage implements OnInit, OnDestroy {
 
     this.loginForm = this.formBuilder.group({
       UserID  : ['', Validators.compose([Validators.required])],
-      Password: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.required])],
+      // Password: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.required])],
+      Password: [],
       DNSName : [DNSName ? {value: DNSName, disabled: true} : '', Validators.compose([Validators.required])]
     });
 

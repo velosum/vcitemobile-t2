@@ -1,17 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavController, Platform, ActionSheetController, Events } from '@ionic/angular';
 import { CitationService } from 'src/app/services/citation.service';
-import {
-  GoogleMap,
-  GoogleMaps,
-  Geocoder,
-  LocationService,
-  MyLocation,
-  LatLng,
-  GoogleMapOptions,
-  Marker,
-  GoogleMapsAnimation,
-  GeocoderResult } from '@ionic-native/google-maps/ngx';
+import { GoogleMap, GoogleMaps, Geocoder, LocationService, MyLocation, LatLng, GoogleMapOptions, Marker, GoogleMapsAnimation, GeocoderResult } from '@ionic-native/google-maps/ngx';
 import { ActionSheetButton } from '@ionic/core';
 import { AppEvents } from 'src/app/utility/constant';
 
@@ -25,13 +15,8 @@ export class MapsPage implements OnInit {
   myLocation: MyLocation;
   myAddress: string;
 
-  constructor(
-    private navCtrl: NavController,
-    private platform: Platform,
-    private citationService: CitationService,
-    private actionSheetCtrl: ActionSheetController,
-    private events: Events
-  ) { }
+  constructor(private navCtrl: NavController, private platform: Platform, private citationService: CitationService, private actionSheetCtrl: ActionSheetController, private events: Events) 
+  { }
 
   // @HostListener('document:ionBackButton', ['$event'])
   // private overrideHardwareBackAction($event: any) {
@@ -56,9 +41,9 @@ export class MapsPage implements OnInit {
       if (location.source === 'maps' &&
         location.latitude === this.myLocation.latLng.lat &&
         location.longitude === this.myLocation.latLng.lng
-        ) {
+      ) {
 
-          // other stuff
+        // other stuff
 
         await location.save();
         await citation.save();
@@ -128,11 +113,11 @@ export class MapsPage implements OnInit {
   }
 
   async getAddresses(latLng: LatLng) {
-    return Geocoder.geocode({position: latLng});
+    return Geocoder.geocode({ position: latLng });
   }
 
   async getPositions(address: string) {
-    return Geocoder.geocode({address: address});
+    return Geocoder.geocode({ address: address });
   }
 
   async showAddressSheet(addresses: string[], latLng: LatLng, handler: any) {

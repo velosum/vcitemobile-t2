@@ -29,19 +29,19 @@
   <!-- scan result -> 'success' -->
   <ion-card *ngIf="scanResult?.status == 'success'" class="citation-info">
     <ion-card-header>
-      <ion-card-subtitle color="secondary">{{scanResult.message}}</ion-card-subtitle>
+      <ion-card-subtitle class="cardsubtitle">{{scanResult.message}}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
       <ion-list>
         <ion-item lines="full">
           <ion-label>Citation #</ion-label>
-          <ion-note>{{citation?.serial_number}}</ion-note>
+          <ion-note class="nottext" margin >{{citation?.serial_number}}</ion-note>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label>Organization #</ion-label>
-          <ion-note>{{citation?.custKey}}</ion-note>
+          <ion-note class="nottext" margin >{{citation?.custKey}}</ion-note>
         </ion-item>
       </ion-list>
     </ion-card-content>

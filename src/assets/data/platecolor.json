@@ -1,0 +1,30 @@
+[
+    {
+       "Name": "Red",
+       "Abbreviation": "R"
+    }, 
+    {
+        "Name": "Green",
+        "Abbreviation": "G"
+    },
+    {
+        "Name": "Yellow",
+        "Abbreviation": "Y"
+    },
+    {
+        "Name": "Blue",
+        "Abbreviation": "B"
+     },
+     {
+        "Name": "Authority",
+        "Abbreviation": "A"
+     },
+     {
+        "Name": "Municipal",
+        "Abbreviation": "M"
+     },
+     {
+        "Name": "State",
+        "Abbreviation": "S"
+     }
+]

@@ -3,18 +3,7 @@ import { Platform, LoadingController } from '@ionic/angular';
 
 import { createConnection, ConnectionOptions, getConnection, getManager, getRepository } from 'typeorm';
 
-import {
-  EntityFactory,
-  VehColor,
-  Citation,
-  VehState,
-  VehMake,
-  Location,
-  Attachment,
-  AttachmentType,
-  PlateType,
-  Violation
-} from '../entities';
+import { EntityFactory, VehColor, Citation, VehState, VehMake, Location, Attachment, AttachmentType, PlateType, Violation, PlateColor } from '../entities';
 import { StorageKeys, DefaultValues } from '../utility/constant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
@@ -51,7 +40,7 @@ export class DbService {
       return;
     }
 
-    const entities: any[] = [VehColor, VehMake, VehState, PlateType, Location, Violation];
+    const entities: any[] = [VehColor, VehMake, VehState, PlateType, Location, Violation, PlateColor];
 
     const loading = await this.loadingCtrl.create({
       message: 'initializing database...'
@@ -86,6 +75,8 @@ export class DbService {
                     return items.map(i => Object.assign(new VehState(), i));
                   case Violation:
                     return items.map(i => Object.assign(new Violation(), i));
+                    case PlateColor:
+                      return items.map(i => Object.assign(new PlateColor(), i));
                 }
               })
             )
@@ -122,6 +113,7 @@ export class DbService {
       defaultCitation.vehicle_color = await getRepository(VehColor).findOne();
       defaultCitation.vehicle_make = await getRepository(VehMake).findOne();
       defaultCitation.plate_type = await getRepository(PlateType).findOne();
+      defaultCitation.plate_color = await getRepository(PlateColor).findOne();
 
       const location = new Location();
       location.Street = '';
@@ -139,14 +131,15 @@ export class DbService {
    * Create DB connection
    */
   async createConnection() {
+
+    try {
     let dbOptions: ConnectionOptions;
 
-    if (this.platform.is('cordova') && this.platform.is('ios')) {
-
+    if (this.platform.is('cordova') || this.platform.is('ios')) {
       dbOptions = {
         type: 'cordova',
         database: '__vcitemobile',
-        location: 'default'
+        location: 'default',
       };
     } else {
       dbOptions = {
@@ -154,7 +147,8 @@ export class DbService {
         location: 'browser',
         autoSave: true
       };
-    } /* else {
+    }
+     /* else {
       dbOptions = {
         type: 'websql',
         database: '__vcitemobile',
@@ -172,7 +166,6 @@ export class DbService {
       entities: EntityFactory.getAllEntities()
     });
 
-    try {
 
       await createConnection(dbOptions);
 

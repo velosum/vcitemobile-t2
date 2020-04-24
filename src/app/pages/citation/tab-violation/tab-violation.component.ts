@@ -5,6 +5,8 @@ import { CitationService } from 'src/app/services/citation.service';
 import { ViolationListModal } from '../violation-list/violation-list.modal';
 import { LocationListModal } from '../location-list/location-list.modal';
 import { DefaultValues, StorageKeys } from 'src/app/utility/constant';
+import { NetworkService } from 'src/app/services/network.service';
+import { NotifyService } from 'ionic4-kits';
 
 @Component({
   selector: 'tab-violation',
@@ -17,7 +19,7 @@ export class TabViolationComponent extends AbstractComponent {
   // TMP
   enabledFields: any = {};
 
-  constructor(private modalCtrl: ModalController, private navCtrl: NavController, private citationService: CitationService) {
+  constructor(private modalCtrl: ModalController, private navCtrl: NavController, private citationService: CitationService, private networkService: NetworkService, private notifyService: NotifyService) {
     super();
   }
 
@@ -60,7 +62,11 @@ export class TabViolationComponent extends AbstractComponent {
   }
 
   async openMaps() {
-    this.navCtrl.navigateForward('/maps');
-  }
 
+    if (this.networkService.isConnected()) {
+      this.navCtrl.navigateForward('/maps');
+    } else {
+      this.notifyService.showNotify('Sorry, this feature requires a connection to your internet, which has currently dropped out.', 'warning');
+    }
+  }
 }

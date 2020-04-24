@@ -5,7 +5,7 @@ import { VehColor } from './VehColor';
 import { Violation } from './Violation';
 import { Attachment } from './Attachment';
 import { Location } from './Location';
-import { PlateType } from '.';
+import { PlateType, PlateColor } from '.';
 
 @Entity('citation')
 export class Citation extends BaseEntity {
@@ -78,11 +78,11 @@ export class Citation extends BaseEntity {
     })
     expiration_date: string;
 
-    // Plate Color
-    @Column({
-        nullable: true
-    })
-    plate_color: string;
+    // // Plate Color
+    // @Column({
+    //     nullable: true
+    // })
+    // plate_color: string;
 
     // Remarks
     @Column({
@@ -129,6 +129,10 @@ export class Citation extends BaseEntity {
     @JoinColumn({name: 'vehcolor_id'})
     vehicle_color: VehColor;
 
+      // Plate Color
+      @ManyToOne(type => PlateColor, {eager: true})
+      @JoinColumn({name: 'plate_id'})
+      plate_color: PlateColor;
 
     // Plate Type
     @ManyToOne(type => VehColor, {eager: true})

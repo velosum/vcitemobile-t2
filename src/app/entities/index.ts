@@ -7,6 +7,7 @@ import { VehMake } from './VehMake';
 import { VehState } from './VehState';
 import { Violation } from './Violation';
 import { Location } from './Location';
+import { PlateColor } from './PlateColor';
 
 export class EntityFactory {
 
@@ -20,7 +21,8 @@ export class EntityFactory {
             VehColor,
             VehMake,
             VehState,
-            Violation
+            Violation,
+            PlateColor
         ];
     }
 }
@@ -34,5 +36,6 @@ export {
     VehColor,
     VehMake,
     VehState,
-    Violation
+    Violation,
+    PlateColor
 };

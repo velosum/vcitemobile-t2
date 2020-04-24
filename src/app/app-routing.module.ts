@@ -37,6 +37,9 @@ const routes: Routes = [
     path: 'maps',
     loadChildren: './pages/maps/maps.module#MapsPageModule'
   },
+  // { path: 'plate-popup', loadChildren: './plate-popup/plate-popup.module#PlatePopupPageModule' },
+  // { path: 'plate-popup', loadChildren: './pages/plate-popup/plate-popup.module#PlatePopupPageModule' },
+  { path: 'platepopup-modal', loadChildren: './pages/platepopup-modal/platepopup-modal.module#PlatepopupModalPageModule' },
 
 ];
 

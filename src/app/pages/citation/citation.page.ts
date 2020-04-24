@@ -7,6 +7,8 @@ import { StorageKeys, AppEvents } from 'src/app/utility/constant';
 import { Events, LoadingController, NavController } from '@ionic/angular';
 import { throwAppError } from 'src/app/shared/error-handler';
 import { NotifyService } from 'ionic4-kits';
+import { NetworkService } from 'src/app/services/network.service';
+
 
 @Component({
   selector: 'app-citation',
@@ -32,14 +34,13 @@ export class CitationPage implements OnInit, OnDestroy {
     private citationService: CitationService,
     private navCtrl: NavController,
     private events: Events,
+    private networkService: NetworkService,
     private loadingCtrl: LoadingController,
     private notifyService: NotifyService,
 
   ) { }
 
   async ngOnInit() {
-
-    this.segment = this.curSegment as any || 'vehicle';
 
     const { cId } = this.route.snapshot.params;
 
@@ -51,6 +52,11 @@ export class CitationPage implements OnInit, OnDestroy {
     try {
       this.citation = await this.citationService.getCitation(Number(cId));
       loading.dismiss();
+      if (this.citation.is_submitted) {
+        this.segment = this.curSegment as any || 'review';
+      } else {
+        this.segment = this.curSegment as any || 'vehicle';
+      }
     } catch (e) {
       loading.dismiss();
 
@@ -82,24 +88,31 @@ export class CitationPage implements OnInit, OnDestroy {
         loading.present();
 
         try {
-          const success = await this.citationService.submitCitation(this.citation);
-          loading.dismiss();
 
-          if (success) {
+          if (this.networkService.isConnected()) {
+            const success = await this.citationService.submitCitation(this.citation);
+            loading.dismiss();
 
-            try {
-              this.citation.is_submitted = true;
-              await this.citation.save();
-            } catch (e) {
-              console.log(e);
+            if (success) {
 
-              throwAppError('DB_ENTITY_UPDATE_FAILED');
+              try {
+                this.citation.is_submitted = true;
+                await this.citation.save();
+              } catch (e) {
+                console.log(e);
+
+                throwAppError('DB_ENTITY_UPDATE_FAILED');
+              }
+
+              this.notifyService.showAlert(success.response, 'Success');
+
+              this.navCtrl.navigateRoot('/citations');
             }
-
-            this.notifyService.showAlert(success.response, 'Success');
-
-            this.navCtrl.navigateRoot('/citations');
+          } else {
+            loading.dismiss();
+            this.notifyService.showNotify('Could not connect to the server. Please check your internet connection/speed.', 'warning');
           }
+
         } catch (e) {
           loading.dismiss();
 
@@ -107,7 +120,7 @@ export class CitationPage implements OnInit, OnDestroy {
 
           this.notifyService.showAlert(JSON.stringify(e), 'Error');
         }
-    });
+      });
   }
 
   segmentChanged(ev: any) {
@@ -118,6 +131,9 @@ export class CitationPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.events.unsubscribe(AppEvents.EVENT_MAP_SELECTED);
+  }
+  checkSegment(displaySegment) {
+    // if(displaySegment ==  "violation")
   }
 
 }

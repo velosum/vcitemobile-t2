@@ -37,5 +37,10 @@
             }
         }
     }
-
+    .platePopupModal .modal-wrapper{
+        border-radius: 43px !important;
+        --width: 80%;
+        border-radius: -16%;
+        --height: 70%;
+      }
 }

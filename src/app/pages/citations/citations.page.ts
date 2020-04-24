@@ -31,22 +31,29 @@ export class CitationsPage implements OnInit {
   async ngOnInit() {
 
     if (!this.authService.currentUser) {
-
       this.navCtrl.navigateRoot('login');
-
     }
   }
 
   async ionViewDidEnter() {
+
     if (this.authService.currentUser) {
+      let loader = await this.loadingCtrl.create({
+        message: 'Please wait...',
+        animated: true,
+        backdropDismiss: true
+      })
+      loader.present();
+      await this.platform.ready().then(async () => {
+        setTimeout(async () => {
+          loader.dismiss();
 
-      await this.platform.ready();
-
-      if (!this.dbService.isSynchronized) {
-        await this.dbService.synchronize();
-      }
-
-      await this.loadData();
+          if (!this.dbService.isSynchronized) {
+            await this.dbService.synchronize();
+          }
+          await this.loadData();
+        }, 2000);
+      });
     }
 
   }
@@ -61,7 +68,7 @@ export class CitationsPage implements OnInit {
       const date = new Date(Number(c.timestamp));
       date.setHours(0, 0, 0, 0);
 
-      (c as any).date = date; // add date attribute for grouping
+      (c as any).date = date; // add date attribute for grouping  
 
       c.is_valid = this.isCitationValid(c);
 
@@ -75,14 +82,13 @@ export class CitationsPage implements OnInit {
 
   async clearLog(date: Date) {
     this.notifyService.showConfirm('Are you sure you want to remove this citation from the log?', 'Confirm', async() => {
-      const citations = this.citations.filter(c => (c as any).date === date);
-      for (const citation of citations) {
+      // const citations = this.citations.filter(c => (c as any).date === date);
+      for (const citation of this.citations) {
         citation.is_visible = false;
         delete (citation as any).date;           // remove temporary attribute
 
         await citation.save();
       }
-
       await this.loadData();
     });
   }

@@ -24,8 +24,11 @@ import { HttpInterceptor } from './shared/http-interceptor';
 import { ErrorHandler } from './shared/error-handler';
 import { ComponentsModule } from './shared/components/components.module';
 import { PipesModule } from './shared/pipes/pipes.module';
+import { OpenALPR } from "@ionic-native/openalpr/ngx";
+import { Network } from '@ionic-native/network/ngx';
 
 import { Ionic4KitsModule } from 'ionic4-kits';
+import { PlatepopupModalPageModule } from './pages/platepopup-modal/platepopup-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,11 +41,14 @@ import { Ionic4KitsModule } from 'ionic4-kits';
     ServicesModule,
     ComponentsModule,
     PipesModule,
-    Ionic4KitsModule.forRoot()
+    Ionic4KitsModule.forRoot(),
+    PlatepopupModalPageModule
+
   ],
   providers: [
     BarcodeScanner,
     Camera,
+    OpenALPR,
     DocumentViewer,
     File,
     FileOpener,
@@ -51,6 +57,7 @@ import { Ionic4KitsModule } from 'ionic4-kits';
     PhotoViewer,
     StatusBar,
     SplashScreen,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: BaseErrorHandler,   useClass: ErrorHandler },
     { provide: HTTP_INTERCEPTORS,  useClass: HttpInterceptor, multi: true }

@@ -18,6 +18,7 @@ const appErrors = {
     'HTTP_ERROR_404': '',
     'HTTP_ERROR_500': '',
     'PLATFORM_NOT_READY': '',
+    'Could not connect to the server. Please check your internet connection/speed.': '',
 };
 
 type AppError = keyof typeof appErrors;

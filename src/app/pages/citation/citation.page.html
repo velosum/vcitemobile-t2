@@ -39,7 +39,8 @@
 
   <ion-toolbar color="primary">
 
-    <ion-segment mode="ios" [(ngModel)]="segment" (ionChange)="segment=$event.target.value" color="primary">
+    <!-- <ion-segment mode="ios" [(ngModel)]="segment" (ionChange)="segment=$event.target.value" color="primary"> -->
+    <ion-segment mode="ios" [(ngModel)]="segment" (ionChange)="checkSegment($event.target.value)" color="primary">
       <ion-segment-button mode="ios" value="vehicle">
         <ion-label>Vehicle</ion-label>
         <ion-icon [src]="'car' | icomoon: 'white'" class="color-trans"></ion-icon>

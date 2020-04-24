@@ -3,6 +3,27 @@
         top: 36px;
     }
 
+    ion-note.nottext{
+        --color: initial;
+        display: block;
+        color: var(--color);
+        font-family: var(--ion-font-family,inherit);
+        font-size: inherit;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-weight: bold;
+    }
+
+    ion-card-subtitle.cardsubtitle {
+        color: #fa9a22;
+        font-weight: bold;
+        font-size: initial;
+        padding-bottom: inherit !important;
+    }
+
     ion-card.citation-info {
         margin-top: 120px;
     }

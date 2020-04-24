@@ -9,21 +9,29 @@
 
   <ion-item>
     <ion-label>Plate Type</ion-label>
-    <veh-select [(ngModel)]="citation.plate_type" (selectChange)="citation.plate_type=$event" entity="platetype"></veh-select>
+    <veh-select [(ngModel)]="citation.plate_type" (selectChange)="citation.plate_type=$event" entity="platetype">
+    </veh-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Plate Color</ion-label>
+    <veh-select [(ngModel)]="citation.plate_color" (selectChange)="citation.plate_color=$event" entity="platecolor">
+    </veh-select>
   </ion-item>
 
   <ion-item>
     <ion-label>License Plate #</ion-label>
     <ion-input text-end textUpper [(ngModel)]="citation.vehicle_license"></ion-input>
-    <ion-icon (click)="scanLicensePlate()" [src]="'enlarge' | icomoon: 'orange'" slot="end" class="color-trans"></ion-icon>
+    <!-- <ion-icon (click)="scanLicensePlateAndVIN('VIN' )" [src]="'enlarge' | icomoon: 'orange'" slot="end" class="color-trans"></ion-icon> -->
+    <ion-icon style="width: 33px !important;"  (click)="scanLicensePlateAndVIN('VIN' )" src="./assets/icomoon/camera-outline.svg"></ion-icon>
   </ion-item>
-
+ 
   <ion-item>
     <ion-label>State of issuance</ion-label>
     <veh-select [(ngModel)]="citation.vehicle_state" (selectChange)="citation.vehicle_state=$event" entity="vehstate">
     </veh-select>
   </ion-item>
-
+  
   <ion-item>
     <ion-label>Expiration Date</ion-label>
     <ion-datetime [(ngModel)]="citation.expiration_date" display-format="MMM, YYYY"></ion-datetime>
@@ -31,10 +39,10 @@
 
   <ion-item>
     <ion-label>VIN</ion-label>
-    <ion-input [(ngModel)]="citation.vehicle_vin" 
-               [maxlength]="VIN_MAX_LENGTH" 
-               (keypress)="validVinInput($event)" text-end textUpper></ion-input>
-    <ion-icon [src]="'enlarge' | icomoon: 'orange'" slot="end" class="color-trans"></ion-icon>
+    <ion-input [(ngModel)]="citation.vehicle_vin" [maxlength]="VIN_MAX_LENGTH" (ionChange)="validVinInput($event)"
+      text-end textUpper></ion-input>
+    <!-- <ion-icon [src]="'enlarge' | icomoon: 'orange'" slot="end" class="color-trans"></ion-icon> -->
+    <ion-icon style="width: 33px !important;" src="./assets/icomoon/camera-outline.svg"></ion-icon>
   </ion-item>
 
   <ion-item>

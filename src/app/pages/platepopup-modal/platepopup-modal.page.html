@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)=" selectNumber('')" slot="end">
+      <ion-button>
+        Chancel
+      </ion-button>
+    </ion-buttons>
+    <ion-title>License Plate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="plateImage" *ngIf="plateImage">
+
+  <ion-list *ngIf="numberList.length > 0" lines="full">
+    <ion-list-header>
+      <ion-label>Results</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-note slot="start">Number</ion-note>
+      <!-- <ion-note slot="end">Confidence</ion-note> -->
+    </ion-item>
+    <ion-item *ngFor="let resultItem of numberList" (click)="selectNumber(resultItem.number )">
+      <ion-label slot="start">{{ resultItem.number }}</ion-label>
+      <ion-label style="display: contents;" slot="end">{{ roundConfidence(resultItem.confidence) }}%</ion-label>
+      <ion-button fill="outline" slot="end">Select</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

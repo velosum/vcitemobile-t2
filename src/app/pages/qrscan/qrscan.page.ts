@@ -6,6 +6,7 @@ import { Citation } from 'src/app/entities/Citation';
 import { CitationService } from 'src/app/services/citation.service';
 import { DefaultValues } from 'src/app/utility/constant';
 import { throwAppError } from 'src/app/shared/error-handler';
+import { Platform, LoadingController } from '@ionic/angular';
 
 
 export interface ScanResult {
@@ -31,7 +32,8 @@ export class QrscanPage implements OnInit {
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController ,
-    private citationService: CitationService
+    private citationService: CitationService,
+    private platform: Platform
   ) { }
 
   async ngOnInit() {
@@ -40,11 +42,14 @@ export class QrscanPage implements OnInit {
 
   async onScan() {
 
+
+    if (this.platform.is('cordova') || this.platform.is('ios')) {
+     
     try {
       this.scanResult = {};
 
       const barcode = await this.barcodeScanner.scan();
-
+      console.log(" barcode => ", barcode );
       this.scanResult.data = barcode.text;
 
       // stop now if scan was no good, or format wasn't QR_CODE
@@ -79,9 +84,33 @@ export class QrscanPage implements OnInit {
 
     } catch (e) {
       console.log(e);
-
       this.showMessage(e, 'danger');
+    }
+    } 
+    else {
+      this.scanResult = {};
 
+      this.scanResult.data =  "https://www.vciteplus.com/portal.aspx?cid=39&sn=TEST106";
+
+      // check if scanned text contains the vciteplus.com domain, and has a query string
+      if (this.scanResult.data.length < 50 || !this.scanResult.data.includes('vciteplus.com') || !this.scanResult.data.includes('?cid')) {
+        this.scanResult.message = 'Not a Velosum ticket.';
+        this.scanResult.status = 'invalid';
+
+        return;
+      }
+      console.log(this.citation);
+
+      if (!this.citation) {
+        this.citation = new Citation();
+      }
+      const {cid, sn} = this.parseParams(this.scanResult.data);
+      this.citation.id = Date.now();
+      this.citation.custKey = cid;
+      this.citation.serial_number = sn;
+
+      this.scanResult.message = 'New Citation scanned!';
+      this.scanResult.status = 'success';
     }
   }
 
@@ -134,9 +163,7 @@ export class QrscanPage implements OnInit {
       throwAppError('DB_ENTITY_READ_FAILED');
     }
   }
-
-
-
+  
   /**
    * parse query params from a url
    *

@@ -74,7 +74,9 @@ export class VehSelectComponent<T extends BaseEntity> implements OnInit, Control
   }
 
   writeValue(value: any) {
+    setTimeout(() => {
     this.value = value;
+    }, 500);
   }
 
   registerOnChange(fn: any) {

@@ -26,7 +26,7 @@
         <ion-icon slot="start" [src]="'user' | icomoon: 'blue'" class="color-trans"></ion-icon>
         <ion-input formControlName="UserID" type="text" placeholder="User ID"></ion-input>
       </ion-item>
-      <show-hide-container>
+      <show-hide-container [hidden]="true">
         <ion-item>
           <ion-icon slot="start" [src]="'lock' | icomoon: 'blue'" class="color-trans"></ion-icon>
           <ion-input formControlName="Password" type="password" placeholder="Password" class="show-hide-input" show-hide-input></ion-input>

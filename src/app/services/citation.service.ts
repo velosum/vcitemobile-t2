@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { File } from '@ionic-native/file/ngx';
-import { FileTransfer, FileTransferObject, FileUploadResult } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer, FileTransferObject, FileUploadResult, FileUploadOptions } from '@ionic-native/file-transfer/ngx';
 import { json2xml } from 'xml-js';
 import * as vkbeautify from 'vkbeautify';
 import { getRepository, Not, getManager, FindConditions, FindManyOptions } from 'typeorm';
@@ -35,11 +35,11 @@ export class CitationService {
   fileTransfer: FileTransferObject;
 
   get currentId(): number {
-    return Number(localStorage.getItem(StorageKeys.CURRENT_CITATION_ID));
+    return Number(window.localStorage.getItem(StorageKeys.CURRENT_CITATION_ID));
   }
 
   set currentId(cId: number) {
-    localStorage.setItem(StorageKeys.CURRENT_CITATION_ID, String(cId));
+    window.localStorage.setItem(StorageKeys.CURRENT_CITATION_ID, String(cId));
   }
 
   constructor(private file: File, private transfer: FileTransfer, private platform: Platform) {
@@ -49,7 +49,7 @@ export class CitationService {
     });
   }
 
-  /**
+  /*
    * get citations
    */
   async getCitations(isVisible = true) {
@@ -108,16 +108,26 @@ export class CitationService {
     if (xmlCitation) {
 
       const newFile = await this.writeXML(xmlCitation);
+      console.log(" newFile.fullPath => ", newFile.fullPath);
       if (newFile) {
 
-        const filePath = `${this.platform.is('ios') ? this.file.dataDirectory : ''}` + newFile.fullPath;
+        // const filePath = `${this.platform.is('ios') ? this.file.dataDirectory : ''}` + newFile.fullPath;
+        const filePath = `${this.platform.is('ios') ? this.file.dataDirectory + newFile.fullPath :  newFile.nativeURL}` ;
+
+        let options: FileUploadOptions = {
+          fileName: newFile.name,
+          mimeType: 'application/xml',
+          chunkedMode: true,
+          headers: {}
+       }
+
 
         console.log('New file', newFile);
-        return await this.uploadFile(filePath, 'http://216.83.136.41/Velosum/AlfWebListener/default.aspx', {
-          fileName: newFile.name,
-          mimeType: 'application/xml'
-        });
+        console.log(' Url for both =>', filePath);
+        // return await this.uploadFile(filePath, 'http://216.83.136.41/Velosum/AlfWebListener/default.aspx', options);
+        return await this.uploadFile(filePath, 'http://216.83.136.37/AlfWebListener/default.aspx', options);
 
+        
       }
     }
   }

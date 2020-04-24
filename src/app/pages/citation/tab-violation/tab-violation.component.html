@@ -3,8 +3,7 @@
     <ion-label>Location Details</ion-label>
 
     <div>
-      <ion-button (click)="openLocationPicker()" 
-                  *ngIf="enabledFields.addressLookup">
+      <ion-button (click)="openLocationPicker()" *ngIf="enabledFields.addressLookup">
         <ion-icon [src]="'home' | icomoon: 'white'" class="color-trans"></ion-icon>
       </ion-button>
 
@@ -24,11 +23,12 @@
     <ion-input text-end [value]="citation.location.ParcelID" readonly></ion-input>
   </ion-item>
   <!-- 
-        <ion-item>
+       <ion-item>
           <ion-label position="stacked">Remarks</ion-label>
           <ion-textarea [(ngModel)]="citation.remarks" autosize></ion-textarea>
-        </ion-item> -->
-        
+        </ion-item>
+  -->
+
   <ion-list-header color="medium">
     <ion-label>
       Violations
@@ -55,16 +55,6 @@
   <ion-item>
     <ion-label position="stacked">Comments</ion-label>
     <ion-textarea [(ngModel)]="citation.comments" autosize [maxlength]="MAX_COMMENTS_LENGTH"></ion-textarea>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Warning</ion-label>
-    <ion-toggle mode="ios" [(ngModel)]="citation.warning" color="secondary"></ion-toggle>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Void</ion-label>
-    <ion-toggle mode="ios" [(ngModel)]="citation.void" color="secondary"></ion-toggle>
   </ion-item>
 
 </ion-list>

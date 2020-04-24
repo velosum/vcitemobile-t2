@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { SettingsService } from './settings.service';
 import { DbService } from './db.service';
+import { NetworkService } from './network.service';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,7 @@ import { DbService } from './db.service';
     ApiService,
     AuthService,
     SettingsService,
-
+    NetworkService,
     DbService
   ]
 })

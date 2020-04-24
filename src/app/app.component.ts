@@ -62,17 +62,17 @@ export class AppComponent {
 
   }
 
-  initializeApp() {
-    this.platform.ready().then(async () => {
+  async initializeApp() {
+    await this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
       await this.dbService.createConnection();
     });
 
-    this.isLoggedIn = !!this.authService.currentUser;
+    this.isLoggedIn = await !!this.authService.currentUser;
 
-    this.events.subscribe(AppEvents.EVENT_LOGGED_IN, () => {
+    await this.events.subscribe(AppEvents.EVENT_LOGGED_IN, () => {
       this.isLoggedIn = !!this.authService.currentUser;
     });
 
