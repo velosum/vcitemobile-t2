@@ -12,23 +12,23 @@ export class AuthService {
   constructor(private apiService: ApiService) { }
 
   set currentUser(user: any) {
-    localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(user));
+    window.localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(user));
   }
 
   get currentUser(): any {
-    return JSON.parse(localStorage.getItem(StorageKeys.CURRENT_USER));
+    return JSON.parse(window.localStorage.getItem(StorageKeys.CURRENT_USER));
   }
 
   signInWithCredential(UserID: string, Password: string) {
-    // return this.apiService.post('User/Login', {UserID, Password});
-    return of({
-      data: {
-        username: 'lynntest'
-      },
-      status: {
-        success: true
-      }
-    });
+    return this.apiService.post('User/Login', {UserID, Password});
+    // return of({
+    //   data: {
+    //     username: 'lynntest'
+    //   },
+    //   status: {
+    //     success: true
+    //   }
+    // });
   }
 
 }

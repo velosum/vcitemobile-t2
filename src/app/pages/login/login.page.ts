@@ -1,6 +1,8 @@
+import { ApiService } from './../../../../src/app/services/api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, ToastController, LoadingController, Events, Platform, MenuController } from '@ionic/angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
 
 import { AuthService } from 'src/app/services/auth.service';
 import { DbService } from 'src/app/services/db.service';
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit, OnDestroy {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
+    private apiService: ApiService,
     private events: Events,
     private authService: AuthService,
     private notifyService: NotifyService,
@@ -42,6 +45,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private menuCtrl: MenuController
   ) {
     this.authSubject = new Subject();
+
+
   }
 
   get dnsControl() {
@@ -50,6 +55,10 @@ export class LoginPage implements OnInit, OnDestroy {
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    // window.localStorage.removeItem(StorageKeys.DB_SYNCHRONIZED);
+    // window.localStorage.removeItem(StorageKeys.CURRENT_USER);
+    // window.localStorage.removeItem(StorageKeys.CURRENT_CITATION_ID);
+    // window.localStorage.removeItem(StorageKeys.CURRENT_DNS_NAME);
   }
 
   ionViewWillLeave() {
@@ -73,12 +82,18 @@ export class LoginPage implements OnInit, OnDestroy {
     });
 
   }
+  // async onLogin() {
+  //   this.apiService.get('citation/PlateType').subscribe(data => {
+  //    alert(" res =>  "+ JSON.stringify(data));
+  //   }, error => {
+  //    alert(" error =>  "+ JSON.stringify(error));
+  //   });
+  // }
 
   async onLogin() {
     if (this.loginForm.valid) {
-
       const {UserID, Password, DNSName} = this.loginForm.getRawValue();
-      localStorage.setItem(StorageKeys.CURRENT_DNS_NAME, DNSName);
+      window.localStorage.setItem(StorageKeys.CURRENT_DNS_NAME, DNSName);
 
       const loading = await this.loadingCtrl.create({
         message: 'authenticating...'
@@ -91,7 +106,7 @@ export class LoginPage implements OnInit, OnDestroy {
           loading.dismiss();
 
           if (resp.status.success) {
-            localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(resp.data));
+            window.localStorage.setItem(StorageKeys.CURRENT_USER, JSON.stringify(resp.data));
 
             // this.notifyService.showNotify('Logged in successfully', 'success');
 

@@ -1,3 +1,4 @@
+import { CitationstorageService } from './../../services/citationstorage.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController, Platform, LoadingController } from '@ionic/angular';
 import { NotifyService } from 'ionic4-kits';
@@ -16,7 +17,9 @@ import { throwAppError } from 'src/app/shared/error-handler';
 export class CitationsPage implements OnInit {
   today = new Date();
 
-  citations: Citation[];
+  // citations: Citation[];
+  citations: any[];
+
 
   constructor(
     private navCtrl: NavController,
@@ -25,11 +28,11 @@ export class CitationsPage implements OnInit {
     private authService: AuthService,
     private notifyService: NotifyService,
     private platform: Platform,
+    private citationstorageService: CitationstorageService,
     private loadingCtrl: LoadingController
   ) { }
 
   async ngOnInit() {
-
     if (!this.authService.currentUser) {
       this.navCtrl.navigateRoot('login');
     }
@@ -38,21 +41,21 @@ export class CitationsPage implements OnInit {
   async ionViewDidEnter() {
 
     if (this.authService.currentUser) {
-      let loader = await this.loadingCtrl.create({
-        message: 'Please wait...',
-        animated: true,
-        backdropDismiss: true
-      })
-      loader.present();
+      // let loader = await this.loadingCtrl.create({
+      //   message: 'Please wait...',
+      //   animated: true,
+      //   backdropDismiss: true
+      // })
+      // loader.present();
       await this.platform.ready().then(async () => {
-        setTimeout(async () => {
-          loader.dismiss();
+        // setTimeout(async () => {
+          // loader.dismiss();
 
           if (!this.dbService.isSynchronized) {
             await this.dbService.synchronize();
           }
           await this.loadData();
-        }, 2000);
+        // }, 2000);
       });
     }
 
@@ -63,63 +66,70 @@ export class CitationsPage implements OnInit {
   }
 
   async loadData(event?: any) {
-    this.citations = await this.citationService.getCitations();
-    this.citations = this.citations.map(c => {
-      const date = new Date(Number(c.timestamp));
-      date.setHours(0, 0, 0, 0);
+    // this.citations = await this.citationService.getCitations();
+    this.citationstorageService.getCitations().then(async citationList => {
+      this.citations = await citationList;
 
-      (c as any).date = date; // add date attribute for grouping  
+      //  let hide it for now.
 
-      c.is_valid = this.isCitationValid(c);
+    // this.citations = this.citations.map(c => {
+    //   const date = new Date(Number(c.timestamp));
+    //   date.setHours(0, 0, 0, 0);
 
-      return c;
-    });
+    //   (c as any).date = date; // add date attribute for grouping
+
+    //   c.is_valid = this.isCitationValid(c);
+
+    //   return c;
+    // });
 
     if (event) {
       event.target.complete();
     }
+  });
   }
 
   async clearLog(date: Date) {
     this.notifyService.showConfirm('Are you sure you want to remove this citation from the log?', 'Confirm', async() => {
       // const citations = this.citations.filter(c => (c as any).date === date);
-      for (const citation of this.citations) {
-        citation.is_visible = false;
-        delete (citation as any).date;           // remove temporary attribute
-
-        await citation.save();
-      }
-      await this.loadData();
+      // for (const citation of this.citations) {
+      //   citation.is_visible = false;
+      //   delete (citation as any).date;    // remove temporary attribute
+      //   await citation.save();
+      // }
+      this.citationstorageService.removeCitations().then( async () => {
+        await this.loadData();
+      });
     });
   }
 
   async submit(citation: Citation) {
 
     const loading = await this.loadingCtrl.create();
-    loading.present();
+    // loading.present();
 
-    try {
-      const success = await this.citationService.submitCitation(citation);
-      loading.dismiss();
+    // try {
+    //   const success = await this.citationService.submitCitation(citation);
+    //   loading.dismiss();
 
-      if (success) {
-        try {
-          citation.is_submitted = true;
-          await citation.save();
-        } catch (e) {
-          console.log(e);
+    //   if (success) {
+    //     try {
+    //       citation.is_submitted = true;
+    //       await citation.save();
+    //     } catch (e) {
+    //       console.log(e);
 
-          throwAppError('DB_ENTITY_UPDATE_FAILED');
-        }
-        this.notifyService.showAlert(success.response, 'Success');
-      }
-    } catch (e) {
-      loading.dismiss();
+    //       throwAppError('DB_ENTITY_UPDATE_FAILED');
+    //     }
+    //     this.notifyService.showAlert(success.response, 'Success');
+    //   }
+    // } catch (e) {
+    //   loading.dismiss();
 
-      console.log('Submit fails!', e);
+    //   console.log('Submit fails!', e);
 
-      this.notifyService.showAlert(JSON.stringify(e), 'Error');
-    }
+    //   this.notifyService.showAlert(JSON.stringify(e), 'Error');
+    // }
   }
 
   missingFields(citation: Citation) {

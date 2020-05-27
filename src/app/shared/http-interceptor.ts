@@ -18,7 +18,7 @@ export class HttpInterceptor implements BaseHttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
       headers: new HttpHeaders({
-        'DNS-NAME': localStorage.getItem(StorageKeys.CURRENT_DNS_NAME)
+        'DNS-NAME': window.localStorage.getItem(StorageKeys.CURRENT_DNS_NAME)
       })
     });
     return next.handle(request).pipe(

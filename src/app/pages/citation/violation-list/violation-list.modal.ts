@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Citation, Violation } from 'src/app/entities';
+// import { Citation, Violation } from 'src/app/entities';
 import { getRepository } from 'typeorm';
 import { DefaultValues } from 'src/app/utility/constant';
 import { NotifyService } from 'ionic4-kits';
+const STORAGE_KEY_VIOLATION = 'violation';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-violation-list',
@@ -11,18 +13,21 @@ import { NotifyService } from 'ionic4-kits';
   styleUrls: ['./violation-list.modal.scss'],
 })
 export class ViolationListModal implements OnInit {
-  citation: Citation;
-  violations: Violation[];
+  citation: any;
+  violations: any[];
 
   readonly VIOLATIONS_MAX = DefaultValues.CITATION_MAX_VIOLATIONS;
 
-  constructor(private modalCtrl: ModalController, private notifyService: NotifyService) { }
+  constructor(private modalCtrl: ModalController, private notifyService: NotifyService, private storage: Storage) { }
 
   async ngOnInit() {
-    this.violations = await getRepository('violation').find() as Violation[];
-    this.violations.map(v => {
-      (v as any).checked = this.citation.violations.filter(cv => cv.violation_id === v.violation_id).length > 0;
-      return v;
+    this.storage.get(STORAGE_KEY_VIOLATION).then(list => {
+      this.violations = list;
+      // this.violations = await getRepository('violation').find() as Violation[];
+      this.violations.map(v => {
+        (v as any).checked = this.citation.violations.filter(cv => cv.violation_id === v.violation_id).length > 0;
+        return v;
+      });
     });
   }
 

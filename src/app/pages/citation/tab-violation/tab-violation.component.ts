@@ -24,8 +24,8 @@ export class TabViolationComponent extends AbstractComponent {
   }
 
   async ngOnInit() {
-    this.enabledFields.addressLookup = localStorage.getItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP) === 'true';
-    this.enabledFields.parcelID = localStorage.getItem(StorageKeys.TOGGLE_PARCEL_ID) === 'true';
+    this.enabledFields.addressLookup = window.localStorage.getItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP) === 'true';
+    this.enabledFields.parcelID = window.localStorage.getItem(StorageKeys.TOGGLE_PARCEL_ID) === 'true';
   }
 
   /**
@@ -58,7 +58,6 @@ export class TabViolationComponent extends AbstractComponent {
       data.address = `${data.StreetNumber}, ${data.Street + (data.Unit ? ', ' + data.Unit : '')}`;
       this.citation.location = data;
     }
-
   }
 
   async openMaps() {

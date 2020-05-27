@@ -9,11 +9,11 @@ export class SettingsService {
   constructor() { }
 
   getSettings(): VSettings {
-    return JSON.parse(localStorage.getItem(this.storageKey));
+    return JSON.parse(window.localStorage.getItem(this.storageKey));
   }
 
   setSettings(config: VSettings) {
-    return localStorage.setItem(this.storageKey, JSON.stringify(config));
+    return window.localStorage.setItem(this.storageKey, JSON.stringify(config));
   }
 
 }

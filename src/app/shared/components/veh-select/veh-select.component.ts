@@ -1,6 +1,14 @@
 import { Component, OnInit, Input, forwardRef, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { getRepository, Repository, BaseEntity } from 'typeorm';
+// import { getRepository, Repository, BaseEntity } from 'typeorm';
+import { Storage } from '@ionic/storage';
+const STORAGE_KEY_LOCATION = 'location';
+const STORAGE_KEY_PLATECOLOR = 'platecolor';
+const STORAGE_KEY_PLATETYPE = 'platetype';
+const STORAGE_KEY_VEHCOLOR = 'vehcolor';
+const STORAGE_KEY_VEHMAKE = 'vehmake';
+const STORAGE_KEY_VEHSTATE = 'vehstate';
+const STORAGE_KEY_VIOLATION = 'violation';
 
 @Component({
   selector: 'veh-select',
@@ -10,7 +18,7 @@ import { getRepository, Repository, BaseEntity } from 'typeorm';
     { provide: NG_VALUE_ACCESSOR,  useExisting: forwardRef(() => VehSelectComponent),  multi: true }
   ]
 })
-export class VehSelectComponent<T extends BaseEntity> implements OnInit, ControlValueAccessor {
+export class VehSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input('entity')
   entityName: string;
@@ -25,14 +33,14 @@ export class VehSelectComponent<T extends BaseEntity> implements OnInit, Control
   placeholder = 'Select';
 
   @Input()
-  default: T;
+  default: any;
 
   @Output()
   selectChange = new EventEmitter();
 
-  list: T[];
+  list: any;
 
-  _value: T;
+  _value: any;
   onChange: Function = () => { };
   onTouched: Function = () => { };
 
@@ -40,7 +48,7 @@ export class VehSelectComponent<T extends BaseEntity> implements OnInit, Control
     return this._value;
   }
 
-  set value(value: T) {
+  set value(value: any) {
 
     if (value) {
       this._value = value;
@@ -51,7 +59,7 @@ export class VehSelectComponent<T extends BaseEntity> implements OnInit, Control
     }
   }
 
-  constructor() { }
+  constructor(private storage: Storage) { }
 
   async ngOnInit() {
     if (!this.entityName) {
@@ -59,9 +67,33 @@ export class VehSelectComponent<T extends BaseEntity> implements OnInit, Control
       return;
     }
 
-    const repository: Repository<T> = getRepository(this.entityName);
+    const repository  = this.entityName;
     if (repository) {
-      this.list = await repository.find({cache: true}) as T[];
+         if (repository == 'PlateColor') {
+        await this.storage.get(STORAGE_KEY_PLATECOLOR).then(values => {
+          this.list = values;
+        });
+      } else if (repository == 'platetype') {
+        await this.storage.get(STORAGE_KEY_PLATETYPE).then(values => {
+          this.list = values;
+        });
+      } else if (repository == 'vehcolor') {
+        await this.storage.get(STORAGE_KEY_VEHCOLOR).then(values => {
+          this.list = values;
+        });
+      } else if (repository == 'vehmake') {
+        await this.storage.get(STORAGE_KEY_VEHMAKE).then(values => {
+          this.list = values;
+        });
+      } else if (repository == 'vehstate') {
+        await this.storage.get(STORAGE_KEY_VEHSTATE).then(values => {
+          this.list = values;
+        });
+      } else if (repository == 'Violation') {
+        await this.storage.get(STORAGE_KEY_VIOLATION).then(values => {
+          this.list = values;
+        });
+      }
     }
 
     if (this.default) {

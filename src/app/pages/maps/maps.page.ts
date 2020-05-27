@@ -1,9 +1,13 @@
+import { CitationstorageService } from './../../services/citationstorage.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavController, Platform, ActionSheetController, Events } from '@ionic/angular';
 import { CitationService } from 'src/app/services/citation.service';
-import { GoogleMap, GoogleMaps, Geocoder, LocationService, MyLocation, LatLng, GoogleMapOptions, Marker, GoogleMapsAnimation, GeocoderResult } from '@ionic-native/google-maps/ngx';
+import {
+  GoogleMap, GoogleMaps, Geocoder, LocationService, MyLocation, LatLng, GoogleMapOptions, Marker,
+  GoogleMapsAnimation, GeocoderResult
+} from '@ionic-native/google-maps/ngx';
 import { ActionSheetButton } from '@ionic/core';
-import { AppEvents } from 'src/app/utility/constant';
+import { AppEvents, StorageKeys } from 'src/app/utility/constant';
 
 @Component({
   selector: 'app-maps',
@@ -15,8 +19,8 @@ export class MapsPage implements OnInit {
   myLocation: MyLocation;
   myAddress: string;
 
-  constructor(private navCtrl: NavController, private platform: Platform, private citationService: CitationService, private actionSheetCtrl: ActionSheetController, private events: Events) 
-  { }
+  constructor(private navCtrl: NavController, private platform: Platform, private citationstorageService: CitationstorageService,
+    private citationService: CitationService, private actionSheetCtrl: ActionSheetController, private events: Events) { }
 
   // @HostListener('document:ionBackButton', ['$event'])
   // private overrideHardwareBackAction($event: any) {
@@ -26,43 +30,53 @@ export class MapsPage implements OnInit {
   //   });
   // }
 
-
   async navPop(event?: any) {
     this.navCtrl.back();
   }
 
   async done() {
-    const citation = await this.citationService.getCurrentCitation();
-    const location = citation.location;
+    this.citationstorageService.getCitationsById(window.localStorage.getItem(StorageKeys.CURRENT_CITATION_ID)).then(async citationByid => {
 
-    if (location) {
-      location.address = this.myAddress;
+      // const citation = await this.citationService.getCurrentCitation();
+      const citation = citationByid[0];
 
-      if (location.source === 'maps' &&
-        location.latitude === this.myLocation.latLng.lat &&
-        location.longitude === this.myLocation.latLng.lng
-      ) {
+      const location = citation.location;
 
-        // other stuff
+      if (location) {
+        location.address = this.myAddress;
 
-        await location.save();
-        await citation.save();
+        if (location.source === 'maps' &&
+          location.latitude === this.myLocation.latLng.lat &&
+          location.longitude === this.myLocation.latLng.lng
+        ) {
 
-        this.events.publish(AppEvents.EVENT_MAP_SELECTED);
+          // other stuff
 
-      } else {
-        location.latitude = this.myLocation.latLng.lat;
-        location.longitude = this.myLocation.latLng.lng;
-        location.source = 'maps';
+          await this.citationstorageService.updateCitations(citation).then(data => {
+          }, errror => {
+            console.log(" errror => ", errror);
+          });
+          setTimeout(() => {
+            this.events.publish(AppEvents.EVENT_MAP_SELECTED);
+          }, 500);
+        } else {
+          location.latitude = this.myLocation.latLng.lat;
+          location.longitude = this.myLocation.latLng.lng;
+          location.source = 'maps';
 
-        await location.save();
-        await citation.save();
+          await this.citationstorageService.updateCitations(citation).then(data => {
 
-        this.events.publish(AppEvents.EVENT_MAP_SELECTED);
+          }, errror => {
+            console.log(" errror => ", errror);
+          });
+          setTimeout(() => {
+            this.events.publish(AppEvents.EVENT_MAP_SELECTED);
+          }, 500);
+        }
       }
-    }
 
-    await this.navPop();
+      await this.navPop();
+    });
   }
 
   async ngOnInit() {

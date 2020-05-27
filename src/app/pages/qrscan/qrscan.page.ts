@@ -1,3 +1,6 @@
+import { CitationstorageService } from './../../services/citationstorage.service';
+import { CitationViewMidel } from './../../model/citationViewModel';
+import { DefaultvaluesService } from './../../services/defaultvalues.service';
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController, NavController, AlertController } from '@ionic/angular';
@@ -25,31 +28,40 @@ export class QrscanPage implements OnInit {
 
   scanResult: ScanResult;
 
-  citation: Citation;
+  citation: CitationViewMidel;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
     private navCtrl: NavController,
     private toastCtrl: ToastController,
-    private alertCtrl: AlertController ,
+    private alertCtrl: AlertController,
+    private defaultvaluesService: DefaultvaluesService,
     private citationService: CitationService,
-    private platform: Platform
+    private platform: Platform,
+    private citationstorageService: CitationstorageService,
+    private loadingCtrl: LoadingController,
   ) { }
 
   async ngOnInit() {
-    this.citation = await this.citationService.getDefaultCitation();
+    // this.citation = await ;
+   this.citationService.getDefaultCitation().then(data => {
+    console.log(' this.citation data => => ',  data);
+   })
+    this.defaultvaluesService.getDefaultValues().then(data => {
+      this.citation = data;
+    console.log(' this.citation => => ',  this.citation);
+
+    });
   }
 
   async onScan() {
 
-
     if (this.platform.is('cordova') || this.platform.is('ios')) {
-     
+    // if (!this.platform.is('ios')) {
     try {
       this.scanResult = {};
 
       const barcode = await this.barcodeScanner.scan();
-      console.log(" barcode => ", barcode );
       this.scanResult.data = barcode.text;
 
       // stop now if scan was no good, or format wasn't QR_CODE
@@ -68,10 +80,9 @@ export class QrscanPage implements OnInit {
         return;
       }
 
-      console.log(this.citation);
 
       if (!this.citation) {
-        this.citation = new Citation();
+        this.citation = new CitationViewMidel();
       }
 
       const {cid, sn} = this.parseParams(this.scanResult.data);
@@ -86,8 +97,7 @@ export class QrscanPage implements OnInit {
       console.log(e);
       this.showMessage(e, 'danger');
     }
-    } 
-    else {
+    } else {
       this.scanResult = {};
 
       this.scanResult.data =  "https://www.vciteplus.com/portal.aspx?cid=39&sn=TEST106";
@@ -99,10 +109,9 @@ export class QrscanPage implements OnInit {
 
         return;
       }
-      console.log(this.citation);
 
       if (!this.citation) {
-        this.citation = new Citation();
+        this.citation = new CitationViewMidel();
       }
       const {cid, sn} = this.parseParams(this.scanResult.data);
       this.citation.id = Date.now();
@@ -111,6 +120,7 @@ export class QrscanPage implements OnInit {
 
       this.scanResult.message = 'New Citation scanned!';
       this.scanResult.status = 'success';
+      console.log(' this.citation =>  ',  this.citation );
     }
   }
 
@@ -119,24 +129,33 @@ export class QrscanPage implements OnInit {
    */
   async onContinue() {
     try {
-      const citation = await this.citationService.getCitation(this.citation.id);
-      if (!citation || citation.id === DefaultValues.CITATION_DEFAULT_ID) {
 
+      const test = true;
+      const loading = await this.loadingCtrl.create();
+      loading.present();
+      // const citation = await this.citationService.getCitation(this.citation.id);
+      // if (!citation || citation.id === DefaultValues.CITATION_DEFAULT_ID) {
+        this.citationstorageService.getCitationsById(this.citation.id).then(data => {
+          console.log(" data =>  ", data);
+        });
+      if (test) {
         this.citation.timestamp = String(Date.now());
         this.citation.is_visible = true;
 
-        console.log(this.citation);
-
+        // console.log(this.citation);
+        // alert( JSON.stringify(this.citation));
         try {
-          await this.citation.save();
-          this.navCtrl.navigateForward(`/citation/${this.citation.id}`);
+          // await this.citation.save();
+          this.citationstorageService.saveCitations(this.citation);
+            setTimeout(async () => {
+            loading.dismiss();
+              await this.navCtrl.navigateForward(`/citation/${this.citation.id}`);
+            }, 1200);
         } catch (e) {
           console.log(e);
-
+          loading.dismiss();
           throwAppError('DB_ENTITY_INSERT_FAILED');
         }
-
-
       } else {
 
         const alert = await this.alertCtrl.create({

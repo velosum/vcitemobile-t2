@@ -1,3 +1,4 @@
+import { CitationstorageService } from './../../services/citationstorage.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Citation } from 'src/app/entities';
@@ -8,6 +9,8 @@ import { Events, LoadingController, NavController } from '@ionic/angular';
 import { throwAppError } from 'src/app/shared/error-handler';
 import { NotifyService } from 'ionic4-kits';
 import { NetworkService } from 'src/app/services/network.service';
+import { Storage } from '@ionic/storage';
+const STORAGE_KEY_CITATIONLIST = 'CitationsList';
 
 
 @Component({
@@ -19,14 +22,14 @@ export class CitationPage implements OnInit, OnDestroy {
 
   segment: 'vehicle' | 'violation' | 'photos' | 'review';
 
-  citation: Citation;
+  citation: any;
 
   private get curSegment() {
-    return localStorage.getItem(StorageKeys.CURRENT_CITATION_VIEW);
+    return window.localStorage.getItem(StorageKeys.CURRENT_CITATION_VIEW);
   }
 
   private set curSegment(segment) {
-    localStorage.setItem(StorageKeys.CURRENT_CITATION_VIEW, segment);
+    window.localStorage.setItem(StorageKeys.CURRENT_CITATION_VIEW, segment);
   }
 
   constructor(
@@ -35,9 +38,10 @@ export class CitationPage implements OnInit, OnDestroy {
     private navCtrl: NavController,
     private events: Events,
     private networkService: NetworkService,
+    private citationstorageService: CitationstorageService,
     private loadingCtrl: LoadingController,
     private notifyService: NotifyService,
-
+    private storage: Storage
   ) { }
 
   async ngOnInit() {
@@ -50,37 +54,41 @@ export class CitationPage implements OnInit, OnDestroy {
     loading.present();
 
     try {
-      this.citation = await this.citationService.getCitation(Number(cId));
-      loading.dismiss();
-      if (this.citation.is_submitted) {
-        this.segment = this.curSegment as any || 'review';
-      } else {
-        this.segment = this.curSegment as any || 'vehicle';
-      }
+      // this.citation = await this.citationService.getCitation(Number(cId));
+      this.storage.get(STORAGE_KEY_CITATIONLIST).then(citationList => {
+        this.citation = citationList.filter(data => data.id == cId)[0];
+        console.log(" this.citation =>  ", this.citation);
+
+        loading.dismiss();
+        if (this.citation.is_submitted) {
+          this.segment = this.curSegment as any || 'review';
+        } else {
+          this.segment = this.curSegment as any || 'vehicle';
+        }
+      });
     } catch (e) {
       loading.dismiss();
 
       console.log(e);
 
-      throwAppError('DB_ENTITY_READ_FAILED');
+      // throwAppError('DB_ENTITY_READ_FAILED');
     }
 
     this.events.subscribe(AppEvents.EVENT_MAP_SELECTED, async () => {
-      this.citation = await this.citationService.getCurrentCitation();
+      this.storage.get(STORAGE_KEY_CITATIONLIST).then(citationList => {
+        this.citation = citationList.filter(data => data.id == cId)[0];
+        // console.log(" this.citation =>  ", this.citation);
+      });
+      // this.citation = await this.citationService.getCurrentCitation();
+      // alert(this.citation);
     });
   }
 
   async onSubmit() {
 
-    try {
-      await this.citation.save();
-    } catch (e) {
-      console.log(e);
+   await  this.saveCitation();
 
-      throwAppError('DB_ENTITY_UPDATE_FAILED');
-    }
-
-    this.notifyService.showConfirm(
+   await  this.notifyService.showConfirm(
       'All changes have been saved to your device storage. Do you want to upload now?',
       'Confirm',
       async () => {
@@ -91,23 +99,23 @@ export class CitationPage implements OnInit, OnDestroy {
 
           if (this.networkService.isConnected()) {
             const success = await this.citationService.submitCitation(this.citation);
-            loading.dismiss();
+            // loading.dismiss();
 
-            if (success) {
+            // if (success) {
 
-              try {
-                this.citation.is_submitted = true;
-                await this.citation.save();
-              } catch (e) {
-                console.log(e);
+            //   try {
+            //     this.citation.is_submitted = true;
+            //     // await this.citation.save();
+            //   } catch (e) {
+            //     console.log(e);
 
-                throwAppError('DB_ENTITY_UPDATE_FAILED');
-              }
+            //     // throwAppError('DB_ENTITY_UPDATE_FAILED');
+            //   }
 
-              this.notifyService.showAlert(success.response, 'Success');
+            //   this.notifyService.showAlert(success.response, 'Success');
 
-              this.navCtrl.navigateRoot('/citations');
-            }
+            //   this.navCtrl.navigateRoot('/citations');
+            // }
           } else {
             loading.dismiss();
             this.notifyService.showNotify('Could not connect to the server. Please check your internet connection/speed.', 'warning');
@@ -131,9 +139,25 @@ export class CitationPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.events.unsubscribe(AppEvents.EVENT_MAP_SELECTED);
+    this.saveCitation();
   }
+
   checkSegment(displaySegment) {
-    // if(displaySegment ==  "violation")
+ 
+  }
+
+  saveCitation() {
+    try {
+      this.citation.timestamp = String(Date.now());
+      this.citation.is_visible = true;
+
+   return this.citationstorageService.updateCitations(this.citation).then(data => {
+       return  data;
+      }, errror => {
+      });
+    } catch (e) {
+      return  throwAppError('DB_ENTITY_UPDATE_FAILED');
+    }
   }
 
 }

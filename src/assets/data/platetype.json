@@ -1,130 +1,162 @@
 [
-    {
-      "Abbreviation": "AHN",
-      "Name": "Motorized Home - Normal"
-    },
-    {
-      "Abbreviation": "AHR",
-      "Name": "Motorized Home - Reserved"
-    },
-    {
-      "Abbreviation": "AMN",
-      "Name": "Ambulances - Normal"
-    },
-    {
-      "Abbreviation": "AMR",
-      "Name": "Ambulances - Reserved"
-    },
-    {
-      "Abbreviation": "ATN",
-      "Name": "Authority Vehicles - MBTA, WRA, ETC."
-    },
-    {
-      "Abbreviation": "AXN",
-      "Name": "Authority Vehicles - MBTA, Motorcycle"
-    },
-    {
-      "Abbreviation": "BUN",
-      "Name": "Buses - Normal"
-    },
-    {
-      "Abbreviation": "BUR",
-      "Name": "Buses - Reserved"
-    },
-    {
-      "Abbreviation": "CON",
-      "Name": "Commercial - Normal"
-    },
-    {
-      "Abbreviation": "COM",
-      "Name": "Commercial  - Other"
-    },
-    {
-      "Abbreviation": "COR",
-      "Name": "Commercial - Reserved"
-    },
-    {
-      "Abbreviation": "MCN",
-      "Name": "Motorcycle - Normal"
-    },
-    {
-      "Abbreviation": "MCR",
-      "Name": "Motorcycle - Reserved"
-    },
-    {
-      "Abbreviation": "MCV",
-      "Name": "Motorcycle - Vanity"
-    },
-    {
-      "Abbreviation": "MVN",
-      "Name": "Municipal Vehicles - Normal"
-    },
-    {
-      "Abbreviation": "MXR",
-      "Name": "Municipal Vehicles - Motorcycle"
-    },
-    {
-      "Abbreviation": "PAN",
-      "Name": "Passenger - Normal"
-    },
-    {
-      "Abbreviation": "PAR",
-      "Name": "Passenger - Reserved"
-    },
-    {
-      "Abbreviation": "PAS",
-      "Name": "Passenger - Special"
-    },
-    {
-      "Abbreviation": "PAV",
-      "Name": "Passenger - Vanity"
-    },
-    {
-      "Abbreviation": "SBN",
-      "Name": "School Buses - Normal"
-    },
-    {
-      "Abbreviation": "SBR",
-      "Name": "School Buses - Reserved"
-    },
-    {
-      "Abbreviation": "SMN",
-      "Name": "Semi-Trailers - Normal"
-    },
-    {
-      "Abbreviation": "SMR",
-      "Name": "Semi-Trailers - Reserved"
-    },
-    {
-      "Abbreviation": "SPN",
-      "Name": "School Pupil - Normal"
-    },
-    {
-      "Abbreviation": "STN",
-      "Name": "State Vehicles - RMV, MDC, National Guard, Etc."
-    },
-    {
-      "Abbreviation": "SXN",
-      "Name": "State Vehicles - RMV, MDC, National Guard, Etc."
-    },
-    {
-      "Abbreviation": "TAN",
-      "Name": "Normal Taxi"
-    },
-    {
-      "Abbreviation": "TAR",
-      "Name": "Reservec Taxi"
-    },
-    {
-      "Abbreviation": "TRN",
-      "Name": "Trailer - Normal"
-    },
-    {
-      "Abbreviation": "TRR",
-      "Name": "Trailer - Reserved"
-    },
-    {
-      "Abbreviation": "OTHER",
-      "Name": "Other"
-    }
+      {
+          "Abbreviation": "AHN",
+          "Name": "Motorized Home - Normal",
+          "id": "0"
+      },
+      {
+          "Abbreviation": "AHR",
+          "Name": "Motorized Home - Reserved",
+          "id": "1"
+      },
+      {
+          "Abbreviation": "AMN",
+          "Name": "Ambulances - Normal",
+          "id": "2"
+      },
+      {
+          "Abbreviation": "AMR",
+          "Name": "Ambulances - Reserved",
+          "id": "3"
+      },
+      {
+          "Abbreviation": "ATN",
+          "Name": "Authority Vehicles - MBTA, WRA, ETC.",
+          "id": "4"
+      },
+      {
+          "Abbreviation": "AXN",
+          "Name": "Authority Vehicles - MBTA, Motorcycle",
+          "id": "5"
+      },
+      {
+          "Abbreviation": "BUN",
+          "Name": "Buses - Normal",
+          "id": "6"
+      },
+      {
+          "Abbreviation": "BUR",
+          "Name": "Buses - Reserved",
+          "id": "7"
+      },
+      {
+          "Abbreviation": "CON",
+          "Name": "Commercial - Normal",
+          "id": "8"
+      },
+      {
+          "Abbreviation": "COM",
+          "Name": "Commercial  - Other",
+          "id": "9"
+      },
+      {
+          "Abbreviation": "COR",
+          "Name": "Commercial - Reserved",
+          "id": "10"
+      },
+      {
+          "Abbreviation": "MCN",
+          "Name": "Motorcycle - Normal",
+          "id": "11"
+      },
+      {
+          "Abbreviation": "MCR",
+          "Name": "Motorcycle - Reserved",
+          "id": "12"
+      },
+      {
+          "Abbreviation": "MCV",
+          "Name": "Motorcycle - Vanity",
+          "id": "13"
+      },
+      {
+          "Abbreviation": "MVN",
+          "Name": "Municipal Vehicles - Normal",
+          "id": "14"
+      },
+      {
+          "Abbreviation": "MXR",
+          "Name": "Municipal Vehicles - Motorcycle",
+          "id": "15"
+      },
+      {
+          "Abbreviation": "PAN",
+          "Name": "Passenger - Normal",
+          "id": "16"
+      },
+      {
+          "Abbreviation": "PAR",
+          "Name": "Passenger - Reserved",
+          "id": "17"
+      },
+      {
+          "Abbreviation": "PAS",
+          "Name": "Passenger - Special",
+          "id": "18"
+      },
+      {
+          "Abbreviation": "PAV",
+          "Name": "Passenger - Vanity",
+          "id": "19"
+      },
+      {
+          "Abbreviation": "SBN",
+          "Name": "School Buses - Normal",
+          "id": "20"
+      },
+      {
+          "Abbreviation": "SBR",
+          "Name": "School Buses - Reserved",
+          "id": "21"
+      },
+      {
+          "Abbreviation": "SMN",
+          "Name": "Semi-Trailers - Normal",
+          "id": "22"
+      },
+      {
+          "Abbreviation": "SMR",
+          "Name": "Semi-Trailers - Reserved",
+          "id": "23"
+      },
+      {
+          "Abbreviation": "SPN",
+          "Name": "School Pupil - Normal",
+          "id": "24"
+      },
+      {
+          "Abbreviation": "STN",
+          "Name": "State Vehicles - RMV, MDC, National Guard, Etc.",
+          "id": "25"
+      },
+      {
+          "Abbreviation": "SXN",
+          "Name": "State Vehicles - RMV, MDC, National Guard, Etc.",
+          "id": "26"
+      },
+      {
+          "Abbreviation": "TAN",
+          "Name": "Normal Taxi",
+          "id": "27"
+      },
+      {
+          "Abbreviation": "TAR",
+          "Name": "Reservec Taxi",
+          "id": "28"
+      },
+      {
+          "Abbreviation": "TRN",
+          "Name": "Trailer - Normal",
+          "id": "29"
+      },
+      {
+          "Abbreviation": "TRR",
+          "Name": "Trailer - Reserved",
+          "id": "30"
+      },
+      {
+          "Abbreviation": "OTHER",
+          "Name": "Other",
+          "id": "31"
+      }
   ]

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://www.vciteplus.com/api'
+  // apiUrl: 'http://www.vciteplus.com/api'
+  apiUrl: 'http://216.83.136.37:8282/api'
+
 };
 
 /*

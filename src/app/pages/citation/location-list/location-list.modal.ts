@@ -26,7 +26,7 @@ export class LocationListModal implements OnInit {
   async ngOnInit() {
     this.loadLocations();
 
-    const syncData = JSON.parse(localStorage.getItem(StorageKeys.DB_SYNCHRONIZED));
+    const syncData = JSON.parse(window.localStorage.getItem(StorageKeys.DB_SYNCHRONIZED));
     this.lastUpdated = syncData.updatedTime;
   }
 
@@ -141,4 +141,3 @@ export class LocationListModal implements OnInit {
     this.streetUnits = await this.loadStreetUnits(location);
   }
 }
-

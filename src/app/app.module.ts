@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler as BaseErrorHandler, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,6 +27,7 @@ import { ComponentsModule } from './shared/components/components.module';
 import { PipesModule } from './shared/pipes/pipes.module';
 import { OpenALPR } from "@ionic-native/openalpr/ngx";
 import { Network } from '@ionic-native/network/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { Ionic4KitsModule } from 'ionic4-kits';
 import { PlatepopupModalPageModule } from './pages/platepopup-modal/platepopup-modal.module';
@@ -34,6 +36,7 @@ import { PlatepopupModalPageModule } from './pages/platepopup-modal/platepopup-m
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(),
     HttpClientModule,
@@ -42,6 +45,10 @@ import { PlatepopupModalPageModule } from './pages/platepopup-modal/platepopup-m
     ComponentsModule,
     PipesModule,
     Ionic4KitsModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: 'vCiteMobiledb_1',
+      driverOrder: ['localstorage']
+    }),
     PlatepopupModalPageModule
 
   ],

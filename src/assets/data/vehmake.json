@@ -1,306 +1,382 @@
 [
-   {
-      "Name": "Acura",
-      "Abbreviation": "ACUR"
-   },
-   {
-      "Name": "Alfa Romeo",
-      "Abbreviation": "ALFA"
-   },
-   {
-      "Name": "American Motors",
-      "Abbreviation": "AMER"
-   },
-   {
-      "Name": "Audi",
-      "Abbreviation": "AUDI"
-   },
-   {
-      "Name": "Avanti",
-      "Abbreviation": "AVTI"
-   },
-   {
-      "Name": "Bentley",
-      "Abbreviation": "BENT"
-   },
-   {
-      "Name": "BMW",
-      "Abbreviation": "BMW"
-   },
-   {
-      "Name": "Buick",
-      "Abbreviation": "BUIC"
-   },
-   {
-      "Name": "Cadillac",
-      "Abbreviation": "CADI"
-   },
-   {
-      "Name": "Chevrolet",
-      "Abbreviation": "CHEV"
-   },
-   {
-      "Name": "Chrysler",
-      "Abbreviation": "CHRY"
-   },
-   {
-      "Name": "Citroen",
-      "Abbreviation": "CITR"
-   },
-   {
-      "Name": "Daewoo",
-      "Abbreviation": "DAEW"
-   },
-   {
-      "Name": "Daihatsu",
-      "Abbreviation": "DAIH"
-   },
-   {
-      "Name": "Datsun",
-      "Abbreviation": "DATS"
-   },
-   {
-      "Name": "Dodge",
-      "Abbreviation": "DODG"
-   },
-   {
-      "Name": "Eagle",
-      "Abbreviation": "EAGL"
-   },
-   {
-      "Name": "Ferrari",
-      "Abbreviation": "FERR"
-   },
-   {
-      "Name": "Fiat",
-      "Abbreviation": "FIAT"
-   },
-   {
-      "Name": "Ford",
-      "Abbreviation": "FORD"
-   },
-   {
-      "Name": "Freightliner",
-      "Abbreviation": "FRTL"
-   },
-   {
-      "Name": "Geo",
-      "Abbreviation": "GEO"
-   },
-   {
-      "Name": "General Motors",
-      "Abbreviation": "GMC"
-   },
-   {
-      "Name": "Grumman",
-      "Abbreviation": "GRUM"
-   },
-   {
-      "Name": "Harley Davidson",
-      "Abbreviation": "HD"
-   },
-   {
-      "Name": "Honda",
-      "Abbreviation": "HOND"
-   },
-   {
-      "Name": "Hummer",
-      "Abbreviation": "HUM"
-   },
-   {
-      "Name": "Hyundai",
-      "Abbreviation": "HYUN"
-   },
-   {
-      "Name": "Indian",
-      "Abbreviation": "INDI"
-   },
-   {
-      "Name": "Infiniti",
-      "Abbreviation": "INFI"
-   },
-   {
-      "Name": "International",
-      "Abbreviation": "INTL"
-   },
-   {
-      "Name": "Isuzu",
-      "Abbreviation": "ISUZ"
-   },
-   {
-      "Name": "Jaguar",
-      "Abbreviation": "JAGU"
-   },
-   {
-      "Name": "Jeep",
-      "Abbreviation": "JEEP"
-   },
-   {
-      "Name": "Kawasaki",
-      "Abbreviation": "KAWA"
-   },
-   {
-      "Name": "Kenworth",
-      "Abbreviation": "KENW"
-   },
-   {
-      "Name": "Kia",
-      "Abbreviation": "KIA"
-   },
-   {
-      "Name": "Lamborghini",
-      "Abbreviation": "LAMB"
-   },
-   {
-      "Name": "Lexus",
-      "Abbreviation": "LEXS"
-   },
-   {
-      "Name": "Lincoln",
-      "Abbreviation": "LINC"
-   },
-   {
-      "Name": "Land Rover",
-      "Abbreviation": "LNDR"
-   },
-   {
-      "Name": "Lotus",
-      "Abbreviation": "LOTU"
-   },
-   {
-      "Name": "Mack",
-      "Abbreviation": "MACK"
-   },
-   {
-      "Name": "Maserati",
-      "Abbreviation": "MASE"
-   },
-   {
-      "Name": "Mazda",
-      "Abbreviation": "MAZD"
-   },
-   {
-      "Name": "Mercury",
-      "Abbreviation": "MERC"
-   },
-   {
-      "Name": "Merkur",
-      "Abbreviation": "MERK"
-   },
-   {
-      "Name": "Mercedes-Benz",
-      "Abbreviation": "MERZ"
-   },
-   {
-      "Name": "MG",
-      "Abbreviation": "MG"
-   },
-   {
-      "Name": "Mini Cooper",
-      "Abbreviation": "MINI"
-   },
-   {
-      "Name": "Mitsubishi",
-      "Abbreviation": "MITS"
-   },
-   {
-      "Name": "Nissan",
-      "Abbreviation": "NISS"
-   },
-   {
-      "Name": "Oldsmobile",
-      "Abbreviation": "OLDS"
-   },
-   {
-      "Name": "Peterbilt",
-      "Abbreviation": "PETR"
-   },
-   {
-      "Name": "Peugeot",
-      "Abbreviation": "PEUG"
-   },
-   {
-      "Name": "Plymouth",
-      "Abbreviation": "PLYM"
-   },
-   {
-      "Name": "Pontiac",
-      "Abbreviation": "PONT"
-   },
-   {
-      "Name": "Porsche",
-      "Abbreviation": "PORS"
-   },
-   {
-      "Name": "Renault",
-      "Abbreviation": "RENA"
-   },
-   {
-      "Name": "Rolls-Royce",
-      "Abbreviation": "ROLS"
-   },
-   {
-      "Name": "Range Rover",
-      "Abbreviation": "RROV"
-   },
-   {
-      "Name": "Saab",
-      "Abbreviation": "SAAB"
-   },
-   {
-      "Name": "Scion",
-      "Abbreviation": "SCIO"
-   },
-   {
-      "Name": "Sterling",
-      "Abbreviation": "STLG"
-   },
-   {
-      "Name": "Saturn",
-      "Abbreviation": "STRN"
-   },
-   {
-      "Name": "Subaru",
-      "Abbreviation": "SUBA"
-   },
-   {
-      "Name": "Suzuki",
-      "Abbreviation": "SUZU"
-   },
-   {
-      "Name": "Tesla",
-      "Abbreviation": "TESL"
-   },
-   {
-      "Name": "Toyota",
-      "Abbreviation": "TOYT"
-   },
-   {
-      "Name": "Triumph",
-      "Abbreviation": "TRIU"
-   },
-   {
-      "Name": "Vespa",
-      "Abbreviation": "VESP"
-   },
-   {
-      "Name": "Volvo",
-      "Abbreviation": "VOLV"
-   },
-   {
-      "Name": "Volkswagen",
-      "Abbreviation": "VW"
-   },
-   {
-      "Name": "Yamaha",
-      "Abbreviation": "YAMA"
-   },
-   {
-      "Name": "Yugo",
-      "Abbreviation": "YUGO"
-   },
-   {
-      "Name": "(unknown)",
-      "Abbreviation": "UNKN"
-   }
-]
+       {
+           "Name": "Acura",
+           "Abbreviation": "ACUR",
+           "id": "0"
+       },
+       {
+           "Name": "Alfa Romeo",
+           "Abbreviation": "ALFA",
+           "id": "1"
+       },
+       {
+           "Name": "American Motors",
+           "Abbreviation": "AMER",
+           "id": "2"
+       },
+       {
+           "Name": "Audi",
+           "Abbreviation": "AUDI",
+           "id": "3"
+       },
+       {
+           "Name": "Avanti",
+           "Abbreviation": "AVTI",
+           "id": "4"
+       },
+       {
+           "Name": "Bentley",
+           "Abbreviation": "BENT",
+           "id": "5"
+       },
+       {
+           "Name": "BMW",
+           "Abbreviation": "BMW",
+           "id": "6"
+       },
+       {
+           "Name": "Buick",
+           "Abbreviation": "BUIC",
+           "id": "7"
+       },
+       {
+           "Name": "Cadillac",
+           "Abbreviation": "CADI",
+           "id": "8"
+       },
+       {
+           "Name": "Chevrolet",
+           "Abbreviation": "CHEV",
+           "id": "9"
+       },
+       {
+           "Name": "Chrysler",
+           "Abbreviation": "CHRY",
+           "id": "10"
+       },
+       {
+           "Name": "Citroen",
+           "Abbreviation": "CITR",
+           "id": "11"
+       },
+       {
+           "Name": "Daewoo",
+           "Abbreviation": "DAEW",
+           "id": "12"
+       },
+       {
+           "Name": "Daihatsu",
+           "Abbreviation": "DAIH",
+           "id": "13"
+       },
+       {
+           "Name": "Datsun",
+           "Abbreviation": "DATS",
+           "id": "14"
+       },
+       {
+           "Name": "Dodge",
+           "Abbreviation": "DODG",
+           "id": "15"
+       },
+       {
+           "Name": "Eagle",
+           "Abbreviation": "EAGL",
+           "id": "16"
+       },
+       {
+           "Name": "Ferrari",
+           "Abbreviation": "FERR",
+           "id": "17"
+       },
+       {
+           "Name": "Fiat",
+           "Abbreviation": "FIAT",
+           "id": "18"
+       },
+       {
+           "Name": "Ford",
+           "Abbreviation": "FORD",
+           "id": "19"
+       },
+       {
+           "Name": "Freightliner",
+           "Abbreviation": "FRTL",
+           "id": "20"
+       },
+       {
+           "Name": "Geo",
+           "Abbreviation": "GEO",
+           "id": "21"
+       },
+       {
+           "Name": "General Motors",
+           "Abbreviation": "GMC",
+           "id": "22"
+       },
+       {
+           "Name": "Grumman",
+           "Abbreviation": "GRUM",
+           "id": "23"
+       },
+       {
+           "Name": "Harley Davidson",
+           "Abbreviation": "HD",
+           "id": "24"
+       },
+       {
+           "Name": "Honda",
+           "Abbreviation": "HOND",
+           "id": "25"
+       },
+       {
+           "Name": "Hummer",
+           "Abbreviation": "HUM",
+           "id": "26"
+       },
+       {
+           "Name": "Hyundai",
+           "Abbreviation": "HYUN",
+           "id": "27"
+       },
+       {
+           "Name": "Indian",
+           "Abbreviation": "INDI",
+           "id": "28"
+       },
+       {
+           "Name": "Infiniti",
+           "Abbreviation": "INFI",
+           "id": "29"
+       },
+       {
+           "Name": "International",
+           "Abbreviation": "INTL",
+           "id": "30"
+       },
+       {
+           "Name": "Isuzu",
+           "Abbreviation": "ISUZ",
+           "id": "31"
+       },
+       {
+           "Name": "Jaguar",
+           "Abbreviation": "JAGU",
+           "id": "32"
+       },
+       {
+           "Name": "Jeep",
+           "Abbreviation": "JEEP",
+           "id": "33"
+       },
+       {
+           "Name": "Kawasaki",
+           "Abbreviation": "KAWA",
+           "id": "34"
+       },
+       {
+           "Name": "Kenworth",
+           "Abbreviation": "KENW",
+           "id": "35"
+       },
+       {
+           "Name": "Kia",
+           "Abbreviation": "KIA",
+           "id": "36"
+       },
+       {
+           "Name": "Lamborghini",
+           "Abbreviation": "LAMB",
+           "id": "37"
+       },
+       {
+           "Name": "Lexus",
+           "Abbreviation": "LEXS",
+           "id": "38"
+       },
+       {
+           "Name": "Lincoln",
+           "Abbreviation": "LINC",
+           "id": "39"
+       },
+       {
+           "Name": "Land Rover",
+           "Abbreviation": "LNDR",
+           "id": "40"
+       },
+       {
+           "Name": "Lotus",
+           "Abbreviation": "LOTU",
+           "id": "41"
+       },
+       {
+           "Name": "Mack",
+           "Abbreviation": "MACK",
+           "id": "42"
+       },
+       {
+           "Name": "Maserati",
+           "Abbreviation": "MASE",
+           "id": "43"
+       },
+       {
+           "Name": "Mazda",
+           "Abbreviation": "MAZD",
+           "id": "44"
+       },
+       {
+           "Name": "Mercury",
+           "Abbreviation": "MERC",
+           "id": "45"
+       },
+       {
+           "Name": "Merkur",
+           "Abbreviation": "MERK",
+           "id": "46"
+       },
+       {
+           "Name": "Mercedes-Benz",
+           "Abbreviation": "MERZ",
+           "id": "47"
+       },
+       {
+           "Name": "MG",
+           "Abbreviation": "MG",
+           "id": "48"
+       },
+       {
+           "Name": "Mini Cooper",
+           "Abbreviation": "MINI",
+           "id": "49"
+       },
+       {
+           "Name": "Mitsubishi",
+           "Abbreviation": "MITS",
+           "id": "50"
+       },
+       {
+           "Name": "Nissan",
+           "Abbreviation": "NISS",
+           "id": "51"
+       },
+       {
+           "Name": "Oldsmobile",
+           "Abbreviation": "OLDS",
+           "id": "52"
+       },
+       {
+           "Name": "Peterbilt",
+           "Abbreviation": "PETR",
+           "id": "53"
+       },
+       {
+           "Name": "Peugeot",
+           "Abbreviation": "PEUG",
+           "id": "54"
+       },
+       {
+           "Name": "Plymouth",
+           "Abbreviation": "PLYM",
+           "id": "55"
+       },
+       {
+           "Name": "Pontiac",
+           "Abbreviation": "PONT",
+           "id": "56"
+       },
+       {
+           "Name": "Porsche",
+           "Abbreviation": "PORS",
+           "id": "57"
+       },
+       {
+           "Name": "Renault",
+           "Abbreviation": "RENA",
+           "id": "58"
+       },
+       {
+           "Name": "Rolls-Royce",
+           "Abbreviation": "ROLS",
+           "id": "59"
+       },
+       {
+           "Name": "Range Rover",
+           "Abbreviation": "RROV",
+           "id": "60"
+       },
+       {
+           "Name": "Saab",
+           "Abbreviation": "SAAB",
+           "id": "61"
+       },
+       {
+           "Name": "Scion",
+           "Abbreviation": "SCIO",
+           "id": "62"
+       },
+       {
+           "Name": "Sterling",
+           "Abbreviation": "STLG",
+           "id": "63"
+       },
+       {
+           "Name": "Saturn",
+           "Abbreviation": "STRN",
+           "id": "64"
+       },
+       {
+           "Name": "Subaru",
+           "Abbreviation": "SUBA",
+           "id": "65"
+       },
+       {
+           "Name": "Suzuki",
+           "Abbreviation": "SUZU",
+           "id": "66"
+       },
+       {
+           "Name": "Tesla",
+           "Abbreviation": "TESL",
+           "id": "67"
+       },
+       {
+           "Name": "Toyota",
+           "Abbreviation": "TOYT",
+           "id": "68"
+       },
+       {
+           "Name": "Triumph",
+           "Abbreviation": "TRIU",
+           "id": "69"
+       },
+       {
+           "Name": "Vespa",
+           "Abbreviation": "VESP",
+           "id": "70"
+       },
+       {
+           "Name": "Volvo",
+           "Abbreviation": "VOLV",
+           "id": "71"
+       },
+       {
+           "Name": "Volkswagen",
+           "Abbreviation": "VW",
+           "id": "72"
+       },
+       {
+           "Name": "Yamaha",
+           "Abbreviation": "YAMA",
+           "id": "73"
+       },
+       {
+           "Name": "Yugo",
+           "Abbreviation": "YUGO",
+           "id": "74"
+       },
+       {
+           "Name": "(unknown)",
+           "Abbreviation": "UNKN",
+           "id": "75"
+       }
+   ]

@@ -7,7 +7,7 @@ export const StorageKeys = {
     CURRENT_DNS_NAME       : 'current_dns_name',
     DB_SYNCHRONIZED        : 'database_is_synchronized',
     TOGGLE_ADDRESS_LOOKUP  : 'address_lookup_enabled',
-    TOGGLE_PARCEL_ID       : 'parcel_id_enabled'
+    TOGGLE_PARCEL_ID       : 'parcel_id_enabled',
 };
 
 export const AppEvents = {

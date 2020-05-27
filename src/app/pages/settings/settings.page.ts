@@ -37,7 +37,7 @@ export class SettingsPage implements OnInit {
   async ngOnInit() {
     const settings: any = this.settingsService.getSettings() || {};
 
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
     console.log(currentUser);
     if (currentUser) {
       // settings.userID  = currentUser.userID;
@@ -54,8 +54,8 @@ export class SettingsPage implements OnInit {
     this.citation = await this.citationService.getDefaultCitation();
     console.log(this.citation);
 
-    this.toggledFields.addressLookup = localStorage.getItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP) === 'true';
-    this.toggledFields.parcelID = localStorage.getItem(StorageKeys.TOGGLE_PARCEL_ID) === 'true';
+    this.toggledFields.addressLookup = window.localStorage.getItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP) === 'true';
+    this.toggledFields.parcelID = window.localStorage.getItem(StorageKeys.TOGGLE_PARCEL_ID) === 'true';
   }
 
   segmentChanged(ev: any) {
@@ -98,13 +98,13 @@ export class SettingsPage implements OnInit {
   // TMP
   toggleAddressLookup(event: any) {
     console.log(event);
-    localStorage.setItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP, String(this.toggledFields.addressLookup));
+    window.localStorage.setItem(StorageKeys.TOGGLE_ADDRESS_LOOKUP, String(this.toggledFields.addressLookup));
   }
 
   // TMP
   toggleParcelID(event: any) {
     console.log(event);
-    localStorage.setItem(StorageKeys.TOGGLE_PARCEL_ID, String(this.toggledFields.parcelID));
+    window.localStorage.setItem(StorageKeys.TOGGLE_PARCEL_ID, String(this.toggledFields.parcelID));
   }
 
 }
